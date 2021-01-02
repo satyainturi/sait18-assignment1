@@ -1,11 +1,7 @@
-#ifdef __cplusplus
-extern "C"{
-#endif
+#ifndef _CALCLIB_H_
+#define _CALCLIB_H_
 
-#ifndef __CALC_LIB
-#define __CALC_LIB
-
-/#include <string>
+#include <string>
 
 struct calc_data 
 {
@@ -13,17 +9,10 @@ struct calc_data
 	int val1, val2;
 	double fval1, fval2;
 };
-  
 
-  void create_calc_data(struct calc_data* cmd);
-  void get_calc_data_string(struct calc_data* cmd, char* msg);
-  char* randomType(struct calc_data* cmd, char* msg); // Return a string to an mathematical operator
-  double randomFloat(struct calc_data* cmd);// Return a random float between 0.0 and 100.0
+void create_calc_data(struct calc_data* cmd);
+void get_calc_data_string(struct calc_data* cmd, char* msg);
+double calculate(struct calc_data* cmd);
+char* compare_value(struct calc_data* cmd, char* msg);
 
-
-#endif
-
-#ifdef __cplusplus
-}  
-#endif
-
+#endif//_CALCLIB_H_
