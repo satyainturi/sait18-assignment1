@@ -15,11 +15,9 @@ struct calc_data
 };
   
 
-  int initCalcLib(void); // Init internal variables to the library, if needed. 
-  int initCalcLib_seed(unsigned int seed); // Init internal variables to the library, use <seed> for specific variable. 
-
+  void create_calc_data(struct calc_data* cmd);
+  void get_calc_data_string(struct calc_data* cmd, char* msg);
   char* randomType(struct calc_data* cmd, char* msg); // Return a string to an mathematical operator
-  int randomInt(struct calc_data* cmd,);// Return a random integer, between 0 and 100. 
   double randomFloat(struct calc_data* cmd);// Return a random float between 0.0 and 100.0
 
 
