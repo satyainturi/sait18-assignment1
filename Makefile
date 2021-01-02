@@ -1,35 +1,32 @@
+# Makefile
 
-all: libcalc test client server
+CPP      = g++
 
+LIBS     = 
+INCS     = 
+BINSER	 = server
+BINCLI	 = client
+CFLAGS   = -lstdc++
+RM       = rm -f
 
+.PHONY: all all-before all-after clean clean-custom
 
+all: clean all-before $(BINSER) $(BINCLI) all-after
+
+clean: clean-custom
+	${RM} servermain.o $(BINSER) client.o $(BINCLI)
+
+$(BINSER):
+	$(CPP) -o server calcLib.c servermain.cpp $(LIBS) $(CFLAGS)
+
+calcLib.o: calcLib.cpp
+	$(CPP) -c calcLib.c -o calcLib.o $(CFLAGS)
+	
 servermain.o: servermain.cpp
-	$(CXX) -Wall -c servermain.cpp -I.
+	$(CPP) -c servermain.cpp -o servermain.o $(CFLAGS)
 
-clientmain.o: clientmain.cpp
-	$(CXX) -Wall -c clientmain.cpp -I.
+$(BINCLI):
+	$(CPP) -o $(BINCLI) clientmain.cpp $(LIBS) $(CFLAGS)
 
-main.o: main.cpp
-	$(CXX) -Wall -c main.cpp -I.
-
-
-test: main.o calcLib.o
-	$(CXX) -L./ -Wall -o test main.o -lcalc
-
-client: clientmain.o calcLib.o
-	$(CXX) -L./ -Wall -o client clientmain.o -lcalc
-
-server: servermain.o calcLib.o
-	$(CXX) -L./ -Wall -o server servermain.o -lcalc
-
-
-
-
-calcLib.o: calcLib.c calcLib.h
-	gcc -Wall -fPIC -c calcLib.c
-
-libcalc: calcLib.o
-	ar -rc libcalc.a -o calcLib.o
-
-clean:
-	rm *.o *.a test server client
+client.o: clientmain.cpp
+	$(CPP) -c clientmain.cpp -o client.o $(CFLAGS)
